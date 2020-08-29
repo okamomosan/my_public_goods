@@ -1,10 +1,18 @@
+
+import random
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
 
 
-author = 'tomo'
+author = 'Your name here'
 
 doc = """
 Your app description
@@ -15,8 +23,8 @@ class Constants(BaseConstants):
     name_in_url = 'my_public_goods'
     players_per_group = 3
     num_rounds = 1
-
-    endowment = c(100)
+    rd = random.randint(50, 100)
+    endowment = c(rd)    # c() means it's a currency
     multiplier = 2
 
 
@@ -27,8 +35,19 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     total_contribution = models.CurrencyField()
     individual_share = models.CurrencyField()
-    print('defined foelds on the Group')
+
+    def set_payoffs(self):
+        players = self.get_players()
+        contributions = [p.contribution for p in players]
+        self.total_contribution = sum(contributions)
+        self.individual_share = self.total_contribution * Constants.multiplier / Constants.players_per_group
+        for p in players:
+            p.payoff = Constants.endowment - p.contribution + self.individual_share
 
 
 class Player(BasePlayer):
-    contribution = models.CurrencyField(min=0,max=Constants.endowment)
+    contribution = models.CurrencyField(
+        min=0,
+        max=Constants.endowment,
+        label="いくら公共財に投資しますか？"
+    )

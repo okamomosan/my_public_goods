@@ -5,7 +5,5 @@ from .models import Constants
 
 
 class PlayerBot(Bot):
-
     def play_round(self):
-        yield (pages.Contribute,{'contribution':c(42)})
-        yield (pages.Results)
+        pass

@@ -2,18 +2,17 @@
 {% load otree static %}
 
 {% block title %}
-    結果
+Page title
 {% endblock %}
 
 {% block content %}
+<ur>
+    <li>初期賦存量は {{ Constants.endowment }}でした。</li>
+    <li>あなたは{{ player.contribution }}を公共財に投資しました。</li>
+    <li>あなたのグループの公共財への総投資額は {{ group.total_contribution }}でした。</li>
+    <li>resulting in an individual share of {{ group.individual_share }}.</li>
+    <li>Your profit is therefore {{ player.payoff }}.</li>
+</ur>
 
-    <p>
-        　あなたが最初に持っていたのは{{ Constants.endowment }}でした。<br>
-        　あなたはそのうち{{ player.contribution }}を拠出し、グループ全体で{{ group.total_contribution }}が集まりました。<br>
-        　それが{{ Constants.multiplier }}倍されたあと、{{ Constants.players_per_group }}等分され分配されます。<br>
-        　これに拠出しなかった残額を加えた{{ player.payoff }}が、あなたの獲得したポイントです。
-    </p>
-    {% next_button %}
+{% next_button %}
 {% endblock %}
-
-

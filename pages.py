@@ -9,23 +9,11 @@ class Contribute(Page):
 
 
 class ResultsWaitPage(WaitPage):
-
-    def after_all_players_arrive(self):
-        group = self.group
-        players = group.get_players()
-        contributions = [p.contribution for p in players]
-        group.total_contribution = sum(contributions)
-        group.individual_share = group.total_contribution * Constants.multiplier / Constants.players_per_group
-        for p in players:
-            p.payoff = Constants.endowment - p.contribution + group.individual_share
+    after_all_players_arrive = 'set_payoffs'
 
 
 class Results(Page):
     pass
 
 
-page_sequence = [
-    Contribute,
-    ResultsWaitPage,
-    Results
-]
+page_sequence = [Contribute, ResultsWaitPage, Results]
