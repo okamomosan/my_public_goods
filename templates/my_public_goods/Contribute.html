@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    拠出額を決めてください
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        　各グループ{{Constants.players_per_group}}人で「公共財ゲーム」を行います。<br>
+        　みなさんは最初に{{ Constants.endowment }}を持っており、その中から好きな金額を「公共財」に拠出します。<br>
+        　{{ Constants.players_per_group }}人の拠出額の合計は、{{ Constants.multiplier }}倍されたあと、３人に均等に分配されます。<br>
+        　最終的に手元に残った金額が多い人の勝利です。
+    </p>
+
+    {% formfield player.contribution label="公共財にいくら拠出しますか？" %}
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    結果
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        　あなたが最初に持っていたのは{{ Constants.endowment }}でした。<br>
+        　あなたはそのうち{{ player.contribution }}を拠出し、グループ全体で{{ group.total_contribution }}が集まりました。<br>
+        　それが{{ Constants.multiplier }}倍されたあと、{{ Constants.players_per_group }}等分され分配されます。<br>
+        　これに拠出しなかった残額を加えた{{ player.payoff }}が、あなたの獲得したポイントです。
+    </p>
+    {% next_button %}
+{% endblock %}
+
+
